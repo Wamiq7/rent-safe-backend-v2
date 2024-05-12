@@ -10,7 +10,7 @@ app.use(express.json());
 
 require('./routes/v1/routes')(app);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, "0.0.0.0", () => {
     console.log(`App is running on ${process.env.PORT}`);
 });
 
