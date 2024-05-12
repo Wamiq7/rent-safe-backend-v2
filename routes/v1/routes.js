@@ -8,4 +8,7 @@ module.exports = function (app) {
     app.use("/user", AuthRoute);
     app.use('/property', PropertyRoute)
     app.use('/agreements', AgreementRoute)
+    app.use("/check", (req, res) => {
+        res.json("Running");
+    })
 };
