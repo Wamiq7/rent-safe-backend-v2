@@ -4,30 +4,6 @@
   "sourceName": "contracts/RentalAgreement.sol",
   "abi": [
     {
-      "inputs": [
-        {
-          "internalType": "uint16",
-          "name": "_agreementId",
-          "type": "uint16"
-        }
-      ],
-      "name": "activateAgreement",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_propertyListing",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -153,6 +129,19 @@
           "type": "uint16"
         }
       ],
+      "name": "activateAgreement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint16",
+          "name": "_agreementId",
+          "type": "uint16"
+        }
+      ],
       "name": "approveCancellation",
       "outputs": [],
       "stateMutability": "nonpayable",
@@ -237,8 +226,19 @@
       ],
       "name": "tenantApproveAgreement",
       "outputs": [],
-      "stateMutability": "nonpayable",
+      "stateMutability": "payable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_propertyListing",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
     },
     {
       "inputs": [],
@@ -351,6 +351,264 @@
           "internalType": "bool",
           "name": "",
           "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "landlord",
+          "type": "address"
+        }
+      ],
+      "name": "getAllAgreementsForLandlords",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint16",
+              "name": "agreementId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "address",
+              "name": "landlord",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tenant",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "stateAgent",
+              "type": "address"
+            },
+            {
+              "internalType": "uint16",
+              "name": "propertyId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rentAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "durationMonths",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "advancePayment",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum RentalAgreement.AgreementStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "landlordApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "tenantApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "extraDetail",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct RentalAgreement.Agreement[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "stateAgent",
+          "type": "address"
+        }
+      ],
+      "name": "getAllAgreementsForStateAgents",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint16",
+              "name": "agreementId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "address",
+              "name": "landlord",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tenant",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "stateAgent",
+              "type": "address"
+            },
+            {
+              "internalType": "uint16",
+              "name": "propertyId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rentAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "durationMonths",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "advancePayment",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum RentalAgreement.AgreementStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "landlordApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "tenantApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "extraDetail",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct RentalAgreement.Agreement[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tenant",
+          "type": "address"
+        }
+      ],
+      "name": "getAllAgreementsForTenants",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint16",
+              "name": "agreementId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "address",
+              "name": "landlord",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tenant",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "stateAgent",
+              "type": "address"
+            },
+            {
+              "internalType": "uint16",
+              "name": "propertyId",
+              "type": "uint16"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rentAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "durationMonths",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "advancePayment",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum RentalAgreement.AgreementStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "landlordApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "tenantApprovalForCancellation",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "extraDetail",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct RentalAgreement.Agreement[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",

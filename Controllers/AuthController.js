@@ -5,7 +5,6 @@ const contract = new web3.eth.Contract(ABIRegistration.abi, process.env.REGISTRA
 
 const viewUserDetailsByWalletAddress = async (req, res) => {
     try {
-        console.log(process.env.REGISTRATION);
         const task = await contract.methods.users(req.params.address).call();
         const name = task.name;
         const cnic = task.cnic;

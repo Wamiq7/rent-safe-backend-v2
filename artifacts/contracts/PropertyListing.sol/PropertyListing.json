@@ -76,6 +76,18 @@
           "internalType": "uint32",
           "name": "listingDate",
           "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rentAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "thumbnailImage",
+          "type": "string"
         }
       ],
       "name": "PropertyListed",
@@ -132,6 +144,11 @@
           "internalType": "uint16",
           "name": "_propertyId",
           "type": "uint16"
+        },
+        {
+          "internalType": "address",
+          "name": "stateAgent",
+          "type": "address"
         }
       ],
       "name": "delistProperty",
@@ -204,6 +221,23 @@
               "internalType": "uint32",
               "name": "listingDate",
               "type": "uint32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "rentAmount",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "thumbnailImage",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct PropertyListing.ListingDetails",
+              "name": "listingDetails",
+              "type": "tuple"
             }
           ],
           "internalType": "struct PropertyListing.Property[]",
@@ -273,6 +307,16 @@
           "internalType": "string",
           "name": "propertyType",
           "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rentAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "thumbnailImage",
+          "type": "string"
         }
       ],
       "stateMutability": "view",
@@ -332,6 +376,16 @@
         {
           "internalType": "string",
           "name": "_propertyType",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_rentAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_thumbnailImage",
           "type": "string"
         }
       ],
@@ -422,6 +476,23 @@
           "internalType": "uint32",
           "name": "listingDate",
           "type": "uint32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "rentAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "thumbnailImage",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct PropertyListing.ListingDetails",
+          "name": "listingDetails",
+          "type": "tuple"
         }
       ],
       "stateMutability": "view",

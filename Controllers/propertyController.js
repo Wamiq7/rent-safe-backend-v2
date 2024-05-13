@@ -2,7 +2,7 @@ const web3 = require('../config/web3Config');
 const ABIProperty = require('../artifacts/contracts/PropertyListing.sol/PropertyListing.json');
 const ABIRegistration = require('../artifacts/contracts/RegistrationContract.sol/RegistrationContract.json');
 
-const propertyContract = new web3.eth.Contract(ABIProperty.abi, "0x10f0490Ec05887AfFab6f60839f47315C69F71f9");
+const propertyContract = new web3.eth.Contract(ABIProperty.abi, process.env.PROPERTY);
 const registrationContract = new web3.eth.Contract(ABIRegistration.abi, process.env.REGISTRATION);
 
 function formatDate(timestamp) {
