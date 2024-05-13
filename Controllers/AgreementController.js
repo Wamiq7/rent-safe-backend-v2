@@ -14,13 +14,16 @@ const getAllAgreements = async (req, res) => {
         const data = await rentalContract.methods.getAllAgreementsWithDetails().call();
         const transformedData = await Promise.all(data.map(async (item) => {
             const userData = await registrationContract.methods.users(item.stateAgent).call();
+            const property = await propertyContract.methods.getPropertyDetails(Number(item.propertyId)).call();
+
             return ({
                 agreementId: Number(item.agreementId),
                 propertyId: Number(item.propertyId),
                 rentAmount: Number(item.rentAmount),
                 durationMonths: Number(item.durationMonths),
                 status: Number(item.status),
-                estateName: userData.estateName
+                estateName: userData.estateName,
+                thumbnail: property.thumbnail
             });
         }));
         res.status(200).json(transformedData);
@@ -36,7 +39,8 @@ const transformUser = (user) => {
     const name = user.name;
     const cnic = user.cnic;
     const estateName = user.estateName;
-    return ({ name, cnic, estateName })
+    const displayPicture = user.displayPicture;
+    return ({ name, cnic, estateName, displayPicture })
 }
 
 const transformProperty = (data) => {
@@ -46,7 +50,8 @@ const transformProperty = (data) => {
         cityArea: data.cityArea,
         floor: Number(data.floor),
         propertyType: data.propertyType,
-        thumbnail: data.thumbnail
+        thumbnail: data.thumbnail,
+        description: data.description
     }
 }
 
