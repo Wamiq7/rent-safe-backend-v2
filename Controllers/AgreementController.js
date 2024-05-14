@@ -15,7 +15,6 @@ const getAllAgreements = async (req, res) => {
         const transformedData = await Promise.all(data.map(async (item) => {
             const userData = await registrationContract.methods.users(item.stateAgent).call();
             const property = await propertyContract.methods.getPropertyDetails(Number(item.propertyId)).call();
-
             return ({
                 agreementId: Number(item.agreementId),
                 propertyId: Number(item.propertyId),
@@ -23,7 +22,7 @@ const getAllAgreements = async (req, res) => {
                 durationMonths: Number(item.durationMonths),
                 status: Number(item.status),
                 estateName: userData.estateName,
-                thumbnail: property.thumbnail
+                thumbnail: property.thumbnailImage
             });
         }));
         res.status(200).json(transformedData);
@@ -50,7 +49,7 @@ const transformProperty = (data) => {
         cityArea: data.cityArea,
         floor: Number(data.floor),
         propertyType: data.propertyType,
-        thumbnail: data.thumbnail,
+        thumbnailImage: data.thumbnailImage,
         description: data.description
     }
 }
@@ -70,6 +69,9 @@ const getAgreementById = async (req, res) => {
             stateAgent: transformUser(stateAgent),
             propertyId: Number(data.propertyId),
             propertyDetails: transformProperty(property),
+            stateAgentWalletAddress: data.stateAgent,
+            tenantWalletAddress: data.tenant,
+            landlordWalletAddress: data.landlord,
             rentAmount: Number(data.rentAmount),
             durationMonths: Number(data.durationMonths),
             advancePayment: Number(data.advancePayment),

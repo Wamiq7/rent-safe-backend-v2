@@ -20,6 +20,7 @@ const transformUser = (user) => {
 const getAllProperties = async (req, res) => {
     try {
         const data = await propertyContract.methods.getAllProperties().call();
+        console.log(data);
         const transformedData = await Promise.all(data.map(async (item) => {
             const userData = await registrationContract.methods.users(item.stateAgent).call();
 
@@ -36,7 +37,8 @@ const getAllProperties = async (req, res) => {
                 imageLinks: item.imageLinks,
                 description: item.description,
                 propertyType: item.propertyType,
-                thumbnail: item.thumbnail,
+                thumbnail: item.listingDetails.thumbnailImage,
+                rentAmount: Number(item.listingDetails.rentAmount),
                 listingDate: formatDate(Number(item.listingDate)),
             };
         }));
@@ -73,7 +75,8 @@ const getRecentlyListedProperties = async (req, res) => {
                 imageLinks: item.imageLinks,
                 description: item.description,
                 propertyType: item.propertyType,
-                thumbnail: item.thumbnail,
+                thumbnail: item.listingDetails.thumbnailImage,
+                rentAmount: Number(item.listingDetails.rentAmount),
                 listingDate: formatDate(Number(item.listingDate)),
             };
         }));
@@ -90,7 +93,7 @@ const getProperty = async (req, res) => {
     try {
         const data = await propertyContract.methods.getPropertyDetails(req.params.id).call();
         const userData = await registrationContract.methods.users(data.stateAgent).call();
-
+        console.log(data);
         const transformedData = {
             propertyAddress: data.propertyAddress,
             cityArea: data.cityArea,
@@ -103,6 +106,8 @@ const getProperty = async (req, res) => {
             imageLinks: data.imageLinks,
             description: data.description,
             propertyType: data.propertyType,
+            thumbnail: data.thumbnailImage,
+            rentAmount: Number(data.rentAmount),
         }
         res.status(200).json(transformedData)
     }
