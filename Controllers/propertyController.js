@@ -92,15 +92,17 @@ const getRecentlyListedProperties = async (req, res) => {
 const getProperty = async (req, res) => {
     try {
         const data = await propertyContract.methods.getPropertyDetails(req.params.id).call();
-        const userData = await registrationContract.methods.users(data.stateAgent).call();
-        console.log(data);
+        const stateAgentDetails = await registrationContract.methods.users(data.stateAgent).call();
+        const landlordDetails = await registrationContract.methods.users(data.ownerWallet).call();
+
         const transformedData = {
             propertyAddress: data.propertyAddress,
             cityArea: data.cityArea,
             floor: Number(data.floor),
             ownerWallet: data.ownerWallet,
-            stateAgent: data.stateAgent,
-            stateAgentDetails: transformUser(userData),
+            stateAgentWallet: data.stateAgent,
+            stateAgentDetails: transformUser(stateAgentDetails),
+            landlordDetails: transformUser(landlordDetails),
             status: Number(data.status),
             delistApproved: data.delistApproved,
             imageLinks: data.imageLinks,

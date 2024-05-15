@@ -23,6 +23,28 @@ const viewUserDetailsByWalletAddress = async (req, res) => {
     }
 
 }
+const getAllStateAgents = async (req, res) => {
+    try {
+        const task = await contract.methods.getUserDetailsByCNIC().call();
+        const name = task.name;
+        const cnic = task.cnic;
+        const role = Number(task.role);
+        const estateName = task.estateName;
+        const email = task.email;
+        const cnicImage = task.cnicImage;
+        const phone = task.phoneNumber;
+        const displayPicture = task.displayPicture;
+
+        res.status(200).json({ name, cnic, role, estateName, email, cnicImage, phone, displayPicture })
+    }
+    catch (err) {
+        res.status(500).json({ message: "No user found against this wallet address" })
+        console.log(err);
+    }
+
+}
 module.exports = {
-    viewUserDetailsByWalletAddress
+    viewUserDetailsByWalletAddress,
+    getAllStateAgents
+
 }
